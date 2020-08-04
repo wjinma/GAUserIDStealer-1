@@ -37,19 +37,19 @@ function removeScript(){
 }
 
 function doFlow(){
-    var cilId=makeid(5);
+    var guhappyId=makeid(5);
     var ifrm_c = document.createElement('iframe');
-    ifrm_c.setAttribute('id', cilId);
-    ifrm_c.setAttribute('class', 'cil_steal');
+    ifrm_c.setAttribute('id', guhappyId);
+    ifrm_c.setAttribute('class', 'guhappy_steal');
     ifrm_c.style.display = "none";
     document.body.appendChild(ifrm_c);
 
-    var cframe=document.getElementById(cilId);
+    var cframe=document.getElementById(guhappyId);
     cframe.addEventListener("load",function(){
         setTimeout(function(){
-            console.log("removing cil - "+cilId);
+            console.log("removing guhappy - "+guhappyId);
             cframe.parentNode.removeChild(cframe);
-            console.log("remove cil - "+cilId+" done");
+            console.log("remove guhappy - "+guhappyId+" done");
         }, 2500);
         
     });
@@ -57,75 +57,78 @@ function doFlow(){
     uuid=-1
     for(i=0;i<dataLayer.length;i++){
         try{
-            uuid=dataLayer[i]['ga_c_id'];
-        }
-        catch(e){
+            if('ga_c_id' in dataLayer[i]){
+                uuid=dataLayer[i]['ga_c_id'];
+                break;
+            }
+        }catch(e){
             console.log("pass");
         }
-        if(uuid!=null){
+    }
+
+    elementUrl=""
+    elementClasses=""
+    elementId=""
+    elementText=""
+    dataanalyticsID="null"
+
+    for(i=dataLayer.length-1;i>=0;i--){
+        if(dataLayer[i]['event']=="gtm.click"){
+            //handling eURL
+            try{
+                if('gtm.elementUrl' in dataLayer[i]){
+                    elementUrl=dataLayer[i]['gtm.elementUrl'];
+                }
+            }catch(e){
+                console.log(e);
+            }
+            
+            //handling eClass
+            try{
+                if('gtm.elementClasses' in dataLayer[i]){
+                    elementClasses=dataLayer[i]['gtm.elementClasses'];
+                }
+            }catch(e){
+                console.log(e);
+            }
+
+            //handling eID
+            try{
+                if('gtm.elementId' in dataLayer[i]){
+                    elementId=dataLayer[i]['gtm.elementId'];
+                }
+            }catch(e){
+                console.log(e);
+            }
+
+            //handling of eTxt
+            try{
+                if('gtm.element' in dataLayer[i]){
+                    if('text' in dataLayer[i]['gtm.element']){
+                        elementText=dataLayer[i]['gtm.element']["text"];
+                    }else if('textContent' in dataLayer[i]['gtm.element']){
+                        elementText=dataLayer[i]['gtm.element']["textContent"];
+                    }
+                }
+            }catch(e){
+                console.log(e);
+            }
+
+            //handling dID
+            try{
+                if('gtm.element' in dataLayer[i]){
+                    if('dataset' in dataLayer[i]['gtm.element']){
+                        if('analytics' in dataLayer[i]['gtm.element'].dataset){
+                            dataanalyticsID=dataLayer[i]['gtm.element'].dataset["analytics"];
+                        }
+                    }
+                }
+            }catch(e){
+                console.log(e);
+            }
             break;
         }
     }
-    element_url=-1
-    for(i=dataLayer.length-1;i>0;i--){
-        try{
-            element_url=dataLayer[i]['gtm.elementUrl'];
-        }
-        catch(e){
-            console.log("pass");
-        }
-        if(element_url!=null){
-            break;
-        }
-    }
-    elementClasses=-1
-    for(i=dataLayer.length-1;i>0;i--){
-        try{
-            elementClasses=dataLayer[i]['gtm.elementClasses'];
-        }
-        catch(e){
-            console.log("pass");
-        }
-        if(elementClasses!=null){
-            break;
-        }
-    }
-    elementId=-1
-    for(i=dataLayer.length-1;i>0;i--){
-        try{
-            elementId=dataLayer[i]['gtm.elementId'];
-        }
-        catch(e){
-            console.log("pass");
-        }
-        if(elementId!=null){
-            break;
-        }
-    }
-    elementText=-1
-    for(i=dataLayer.length-1;i>0;i--){
-        try{
-            elementText=dataLayer[i]['gtm.element']["text"];
-        }
-        catch(e){
-            console.log("pass");
-        }
-        if(elementText!=null){
-            break;
-        }
-    }
-    dataanalyticsID=-1
-    for(i=dataLayer.length-1;i>0;i--){
-        try{
-            dataanalyticsID=dataLayer[i]['gtm.element'].dataset["analytics"];
-        }
-        catch(e){
-            console.log("pass");
-        }
-        if(dataanalyticsID!=null){
-            break;
-        }
-    }
-        
+
     cframe.src ="https://guqima.github.io/GAUserIDStealer/steal.html?uid=="+uuid+"&&domain=="+window.location.hostname+"&&cid=="+getgaCid()+"&&url=="+window.location.href+"&&dataanalyticsID="+dataanalyticsID+"&&element_url=="+element_url+"&&elementClasses="+elementClasses+"&&elementId="+elementId+"&&elementText="+elementText;
 }

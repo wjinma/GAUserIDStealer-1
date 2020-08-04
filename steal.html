@@ -16,44 +16,12 @@
                 }
             }
         }
-        var uid = GetURLParameter('uid');
         var domain = GetURLParameter('domain');
-        var cid = GetURLParameter('cid');
-        var url = GetURLParameter('url');
-        var element_url = GetURLParameter('element_url');
-        url=decodeURIComponent(url);
-        element_url=decodeURIComponent(element_url);
-        function CombinetwoURLs(url, element_url){
-            fURL = "undefined"
-            if(element_url == "-1"){
-                element_url="";
-            }            
-            if(element_url!="" && element_url!="undefined"){
-                fURL=element_url;
-            }
-            else{
-                fURL=url;
-            }
-            if (fURL==""){
-                fURL="undefined"
-            }
-            return fURL;
-        }
-        var finalURL = CombinetwoURLs(url, element_url)
         dataLayer = [{
-            'uid': uid,
             'domain': domain,
-            'cid': cid,
-            'url':url,
-            'element_url':element_url,
-            'finalURL':finalURL
         }];
-        console.log("guhappy steal UID " + uid);
-        console.log("guhappy steal DOM " + domain);
-        console.log("guhappy steal CID " + cid);
-        console.log("guhappy steal URL " + url);
-        console.log("guhappy steal element_url " + element_url);
-        console.log("guhappy steal finalURL " + finalURL);        
+        console.log("guhappy steal DOM: " + domain);    
+        console.log("guhappy steal pagepath: "+window.location.href); 
         (function(w,d,s,l,i)
             {w[l]=w[l]||[];
              w[l].push({
