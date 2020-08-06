@@ -50,7 +50,7 @@ function doFlow(){
             console.log("removing guhappy - "+guhappyId);
             cframe.parentNode.removeChild(cframe);
             console.log("remove guhappy - "+guhappyId+" done");
-        }, 2500);
+        }, 5000);
         
     });
 
