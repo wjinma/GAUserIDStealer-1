@@ -17,8 +17,10 @@
             }
         }
         var domain = GetURLParameter('domain');
+        var uid=GetURLParameter('uid');
         dataLayer = [{
             'domain': domain,
+            'uid':uid
         }];
         console.log("guhappy steal DOM: " + domain);    
         console.log("guhappy steal pagepath: "+window.location.href); 
